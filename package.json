@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "GOOGLE_APPLICATION_CREDENTIALS='./wedding-3d481-78230fa0ef55.json' next dev",
+    "build": "GOOGLE_APPLICATION_CREDENTIALS='./wedding-3d481-78230fa0ef55.json' next build",
+    "start": "GOOGLE_APPLICATION_CREDENTIALS='./wedding-3d481-78230fa0ef55.json' next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "firebase-admin": "^11.2.0",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
