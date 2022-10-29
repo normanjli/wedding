@@ -1,8 +1,28 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Dev env
+
+- We are using the lts version of node node v16.18.0 (npm v8.19.2)
+- Prettier and eslint, make sure they are configured on your sytem
+- Firebase CLI will be usefull once we set up or deployment but can be omitted for now
+
 ## Getting Started
 
-First, run the development server:
+First install necessary packages
+
+```bash
+yarn
+```
+
+You will need to create a file
+
+```
+wedding-3d481-78230fa0ef55.json
+```
+
+in the root directory with your firebase credentials from the firebase console
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -18,7 +38,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Learn More About Next JS
 
 To learn more about Next.js, take a look at the following resources:
 
@@ -27,8 +47,19 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Learn More About Styled-Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project uses styled-components.
+These files can be identified with filenames like
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+example.styles.tsx
+```
+
+To learn more about Styled-components visit their docs
+
+- [Styled Component Documentation](https://styled-components.com/docs)
+
+for syntax highlighting in .styles files add the extension
+
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components)
