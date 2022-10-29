@@ -1,8 +1,27 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Dev env
+
+We are using the lts version of node node v16.18.0 (npm v8.19.2)
+Firebase CLI will be usefull once we set up or deployment but can be omitted for now
+
 ## Getting Started
 
-First, run the development server:
+First install necessary packages
+
+```bash
+yarn
+```
+
+You will need to create a file
+
+```
+wedding-3d481-78230fa0ef55.json
+```
+
+in the root directory with your firebase credentials from the firebase console
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -26,9 +45,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
