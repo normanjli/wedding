@@ -1,5 +1,5 @@
 import styled, { StyledComponent } from 'styled-components';
-import { Colors } from '../Styles/Colors';
+import { Colors } from '../../styles/Colors';
 
 export const StyledHeader = styled.header`
   grid-template-rows: 1fr 1fr;
