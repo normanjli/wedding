@@ -17,7 +17,7 @@ const Header = () => {
       <StyledHeader>
         <div>
           <HeaderTitle>Kaitlin & Norman</HeaderTitle>
-          <HeaderSubTitle>April 23rd, 2022 | Crestline, CA</HeaderSubTitle>
+          <HeaderSubTitle>April 23rd, 2023 | Crestline, CA</HeaderSubTitle>
         </div>
         <Nav>
           <Link href="/" passHref>

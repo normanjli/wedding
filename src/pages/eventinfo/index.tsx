@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Header from '../../components/header/Header';
 
-const Schedule: NextPage = () => {
+const EventInfo: NextPage = () => {
   return (
     <div>
       <main>
@@ -13,4 +13,4 @@ const Schedule: NextPage = () => {
   );
 };
 
-export default Schedule;
+export default EventInfo;
