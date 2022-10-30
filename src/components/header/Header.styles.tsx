@@ -12,15 +12,24 @@ interface HeaderLinkProps {
   active: boolean;
 }
 export const HeaderLink = styled.a<HeaderLinkProps>`
+  padding-bottom: 2px;
   font-size: 16px;
   font-weight: ${(props) => (props.active ? 600 : 400)};
-  text-decoration: ${(props) => (props.active ? 'underline' : 'unset')};
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: ${(props) => (props.active ? '100% 3px' : '0% 3px')};
+  transition: background-size 0.3s;
+  transition-timing-function: ease-out;
+  transition-delay: 0.1s;
   font-family: 'Roboto', sans-serif;
   color: ${Colors.primary};
   font-size: 18px;
   width: 'fit-content';
-  :hover {
-    text-decoration: underline;
+  :hover,
+  :focus {
+    background-size: 100% 3px;
   }
 `;
 
