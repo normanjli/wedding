@@ -28,9 +28,9 @@ const Header = () => {
               Where to stay
             </HeaderLink>
           </Link>
-          <Link href="/schedule" passHref>
-            <HeaderLink active={router.pathname === '/schedule'}>
-              Schedule
+          <Link href="/eventinfo" passHref>
+            <HeaderLink active={router.pathname === '/eventinfo'}>
+              Event Information
             </HeaderLink>
           </Link>
           <Link href="/registry" passHref>
