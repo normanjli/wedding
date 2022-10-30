@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 export enum ReservationStatus {
-  Attending = "attending",
-  Tentative = "tentative",
-  NotAttending = "not attending",
+  Attending = 'attending',
+  Tentative = 'tentative',
+  NotAttending = 'not attending',
 }
 
 export interface ReservationInterface {
@@ -12,13 +13,13 @@ export interface ReservationInterface {
 }
 
 export class Reservation implements ReservationInterface {
-  name = "";
+  name = '';
 
   status: ReservationStatus = ReservationStatus.NotAttending;
 
   partySize = 0;
 
-  email = "";
+  email = '';
 
   constructor(props: ReservationInterface) {
     this.email = props.email;
