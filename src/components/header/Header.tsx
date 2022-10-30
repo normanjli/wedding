@@ -17,7 +17,7 @@ const Header = () => {
       <StyledHeader>
         <div>
           <HeaderTitle>Kaitlin & Norman</HeaderTitle>
-          <HeaderSubTitle>April 23rd, 2022 | Crestline, CA</HeaderSubTitle>
+          <HeaderSubTitle>April 23rd, 2023 | Crestline, CA</HeaderSubTitle>
         </div>
         <Nav>
           <Link href="/" passHref>
@@ -28,9 +28,9 @@ const Header = () => {
               Where to stay
             </HeaderLink>
           </Link>
-          <Link href="/schedule" passHref>
-            <HeaderLink active={router.pathname === '/schedule'}>
-              Schedule
+          <Link href="/eventinfo" passHref>
+            <HeaderLink active={router.pathname === '/eventinfo'}>
+              Event Information
             </HeaderLink>
           </Link>
           <Link href="/registry" passHref>
