@@ -4,7 +4,7 @@ import { reservationsCollection } from '../../../utils/firebase';
 
 type Data =
   | {
-      reservations: Reservation;
+      reservation: Reservation;
     }
   | {
       status: number;
@@ -33,7 +33,7 @@ export default async function handler(
     }
 
     const reservation = new Reservation(data[0].data() as ReservationInterface);
-    res.status(200).json({ reservations: reservation });
+    res.status(200).json({ reservation: reservation });
   }
   if (method === 'POST' || method === 'PUT') {
     const body = req?.body;
@@ -49,7 +49,7 @@ export default async function handler(
       .doc(existingReservationSnapshot?.id || body.email)
       .set(body)
       .then(() => {
-        res.status(200).json({ reservations: new Reservation(body) });
+        res.status(200).json({ reservation: new Reservation(body) });
       })
       .catch((e) => {
         res.status(200).json({ status: 204, message: e.message });

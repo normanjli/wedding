@@ -1,0 +1,49 @@
+import React, { useState } from 'react';
+import { Reservation } from '../../models/Reservation';
+import { Button } from '../button/Button.style';
+import { Input } from '../form/Form.style';
+import { ModalClose, ModalContainer, ModalContent } from './Modal.styles';
+import axios from 'axios';
+
+export type ModalProps = {
+  requestClose: () => void;
+  // eslint-disable-next-line no-unused-vars
+  setFormData: (reservation: Reservation) => void;
+};
+
+export const Modal = ({ requestClose, setFormData }: ModalProps) => {
+  const [input, setInputVal] = useState('');
+
+  const onChangeEmailInput = (event: any) => {
+    setInputVal(event.target.value);
+  };
+
+  const searchEmail = async () => {
+    const endpoint = `/api/reservation?email=${input}`;
+
+    const {
+      data: { reservation },
+    } = await axios.get(endpoint);
+    setFormData(reservation);
+  };
+
+  return (
+    <ModalContainer>
+      <ModalContent>
+        <ModalClose onClick={requestClose}>X</ModalClose>
+        Enter your email below to retrieve your Reservation
+        <Input
+          onChange={onChangeEmailInput}
+          type="text"
+          id="email-lookup"
+          name="email"
+          required
+          placeholder="email"
+        />
+        <Button onClick={searchEmail}>Submit</Button>
+      </ModalContent>
+    </ModalContainer>
+  );
+};
+
+export default Modal;

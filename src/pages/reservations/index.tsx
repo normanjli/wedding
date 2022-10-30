@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { ReservationForm } from '../../components/form/Form';
 import Header from '../../components/header/Header';
 
 const Reservations: NextPage = () => {
@@ -6,6 +7,7 @@ const Reservations: NextPage = () => {
     <div>
       <main>
         <Header />
+        <ReservationForm></ReservationForm>
       </main>
     </div>
   );
