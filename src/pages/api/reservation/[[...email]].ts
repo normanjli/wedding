@@ -1,8 +1,6 @@
-import { randomUUID } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Reservation, ReservationInterface } from '../../../models/Reservation';
 import { reservationsCollection } from '../../../utils/firebase';
-import { v4 as uuid } from 'uuid';
 
 type Data =
   | {
@@ -17,7 +15,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log(req.body);
   const { method } = req;
 
   if (method === 'GET') {
@@ -26,11 +23,12 @@ export default async function handler(
     if (!email) {
       return res.status(200).json({ status: 204, message: '' });
     }
+
     const data = (
-      await reservationsCollection.where('email', '==', email[0]).get()
+      await reservationsCollection.where('email', '==', email).get()
     ).docs;
 
-    if (!data) {
+    if (!data?.[0]?.data?.()) {
       return res.status(200).json({ status: 204, message: '' });
     }
 
@@ -38,17 +36,17 @@ export default async function handler(
     res.status(200).json({ reservations: reservation });
   }
   if (method === 'POST' || method === 'PUT') {
-    const { body } = req;
-
+    const body = req?.body;
     if (!body) {
       return res.status(200).json({ status: 204, message: '' });
     }
+
     const existingReservationSnapshot = await reservationsCollection
-      .where('email', '==', body.email)
+      .doc(body.email)
       .get();
 
     reservationsCollection
-      .doc(existingReservationSnapshot?.docs[0]?.id || uuid())
+      .doc(existingReservationSnapshot?.id || body.email)
       .set(body)
       .then(() => {
         res.status(200).json({ reservations: new Reservation(body) });
