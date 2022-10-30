@@ -39,5 +39,5 @@ next-env.d.ts
 wedding-3d481-78230fa0ef55.json
 
 #firebase debug
-.firebase/*
+.firebase*
 firebase-debug.log*
