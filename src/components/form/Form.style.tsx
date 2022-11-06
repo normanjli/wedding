@@ -10,6 +10,7 @@ export const Form = styled.form`
   border: 1px dashed ${Colors.dark};
   padding: 24px;
   border-radius: 16px;
+  background-color: white;
 `;
 
 export const LabelContainer = styled.label`

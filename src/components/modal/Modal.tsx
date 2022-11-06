@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Reservation } from '../../models/Reservation';
 import { Button } from '../button/Button.style';
 import { Input } from '../form/Form.style';
@@ -14,18 +14,30 @@ export type ModalProps = {
 export const Modal = ({ requestClose, setFormData }: ModalProps) => {
   const [input, setInputVal] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onChangeEmailInput = (event: any) => {
     setInputVal(event.target.value);
   };
 
-  const searchEmail = async () => {
+  const searchEmail = useCallback(async () => {
+    if (isLoading) {
+      return;
+    }
+    setIsLoading(true);
     const endpoint = `/api/reservation?email=${input}`;
 
-    const {
-      data: { reservation },
-    } = await axios.get(endpoint);
+    const { data } = await axios.get(endpoint);
+    setIsLoading(false);
+
+    if (!data) {
+      return;
+    }
+
+    const reservation = new Reservation(data.reservation);
     setFormData(reservation);
-  };
+    requestClose();
+  }, [isLoading, setIsLoading, setFormData, input, requestClose]);
 
   return (
     <ModalContainer>

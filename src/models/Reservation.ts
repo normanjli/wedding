@@ -8,23 +8,31 @@ export enum ReservationStatus {
 export interface ReservationInterface {
   name: string;
   status: ReservationStatus;
-  partySize: number;
   email: string;
+  partySize?: number;
+  veg?: number;
+  guestList?: string[];
 }
 
 export class Reservation implements ReservationInterface {
   name = '';
 
-  status: ReservationStatus = ReservationStatus.NotAttending;
+  status: ReservationStatus = ReservationStatus.Attending;
 
   partySize = 0;
 
   email = '';
 
-  constructor(props: ReservationInterface) {
-    this.email = props.email;
-    this.name = props.name;
-    this.partySize = props.partySize;
-    this.status = props.status;
+  veg = 0;
+
+  guestList: string[] = [];
+
+  constructor(props?: ReservationInterface) {
+    this.email = props?.email || '';
+    this.name = props?.name || '';
+    this.partySize = props?.partySize || 0;
+    this.status = props?.status || ReservationStatus.Attending;
+    this.veg = props?.veg || 0;
+    this.guestList = props?.guestList || [];
   }
 }

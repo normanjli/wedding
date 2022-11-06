@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ReservationStatus } from '../../models/Reservation';
+import { Reservation, ReservationStatus } from '../../models/Reservation';
 import { Colors } from '../../styles/Colors';
 import { Button } from '../button/Button.style';
 import { Modal } from '../modal/Modal';
@@ -14,23 +14,27 @@ import {
 import axios from 'axios';
 
 export function ReservationForm() {
-  const [isAttending, setAttending] = useState(true);
-  const [partySize, setPartySize] = useState<number | undefined>(undefined);
+  const [formData, setFormData] = useState<Reservation>(new Reservation());
+
+  const [isAttending, setAttending] = useState(
+    formData.status !== ReservationStatus.NotAttending
+  );
   const [isWarningVisible, setWarningVisible] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fullNameInputs, setFullNameInputs] = useState<JSX.Element[]>([]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    formData.guestList = [formData.name];
+    for (let i = 0; i < formData.partySize - 1; i++) {
+      formData.guestList.push(event.target[`guest${i + 1}`].value);
+    }
 
     const body = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      partySize: event.target.partySize.value,
-      status: event.target.status.value,
+      ...formData,
     };
 
     const endpoint = '/api/reservation';
-
     await axios.post(endpoint, body);
   };
 
@@ -42,50 +46,116 @@ export function ReservationForm() {
     setAttending(true);
   };
 
-  const validatePartySize = (event: any) => {
-    setWarningVisible(false);
-    if (event.target.value === 'e') {
-      setPartySize(1);
-    }
-    if (event.target.value > 5) {
-      setWarningVisible(true);
-      setPartySize(5);
+  const onChangeName = (event: any) => {
+    setFormData({ ...formData, name: event.target.value });
+  };
+
+  const onChangeEmail = (event: any) => {
+    setFormData({ ...formData, email: event.target.value });
+  };
+
+  const onChangeAttending = (event: any) => {
+    setFormData({ ...formData, status: event.target.value });
+    disablePartySize(event);
+  };
+
+  const renderInputs = (number: number, previousGuests?: string[]) => {
+    const inputs = [];
+
+    if (number > 1) {
+      for (let i = 1; i <= number - 1; i++) {
+        inputs.push(
+          <LabelContainer key={i} htmlFor={`guest${i}`}>
+            Enter Full Name of Guest {i}
+            <Input
+              type="text"
+              id={`guest${i}`}
+              name={`guest${i}`}
+              required
+              placeholder={`guest ${i}`}
+              defaultValue={previousGuests?.[i] || ''}
+            />
+          </LabelContainer>
+        );
+      }
+      setFullNameInputs(inputs);
       return;
     }
-    setPartySize(event.target.value);
+    setFullNameInputs([]);
+  };
+
+  const validatePartySize = (event: any) => {
+    if (event.target.value == 0) {
+      setFormData({
+        ...formData,
+        status: ReservationStatus.NotAttending,
+        partySize: 0,
+      });
+      renderInputs(0);
+      setAttending(false);
+      return;
+    }
+
+    setWarningVisible(false);
+    if (event.target.value > 5) {
+      setWarningVisible(true);
+      setFormData({ ...formData, partySize: 5 });
+      renderInputs(5);
+      return;
+    }
+    setFormData({ ...formData, partySize: event.target.value });
+    renderInputs(event.target.value);
+  };
+
+  const validateMeals = (event: any) => {
+    if (event.target.value > formData.partySize) {
+      setFormData({ ...formData, veg: formData.partySize });
+
+      return;
+    }
+    setFormData({ ...formData, veg: event.target.value });
+  };
+
+  const setFormDataHandler = (reservation: Reservation) => {
+    renderInputs(reservation.guestList.length, reservation.guestList);
+    setFormData(reservation);
   };
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
         <LabelContainer htmlFor="name">
-          Enter Party Name
+          Enter Your Name
           <Input
+            onChange={onChangeName}
             type="text"
             id="name"
             name="name"
             required
-            placeholder="name"
+            placeholder="full name"
+            value={formData.name}
           />
         </LabelContainer>
         <LabelContainer htmlFor="email">
           Enter Email
           <Input
+            onChange={onChangeEmail}
             type="text"
             id="email"
             name="email"
             required
             placeholder="email"
+            value={formData.email}
           />
         </LabelContainer>
         <LabelContainer htmlFor="attending">
           Are you coming?
           <Select
-            defaultValue={ReservationStatus.Attending}
-            onChange={disablePartySize}
+            onChange={onChangeAttending}
             id="attending"
             name="status"
             required
+            value={formData.status}
           >
             <Option value={ReservationStatus.Attending}>attending</Option>
             <Option value={ReservationStatus.NotAttending}>
@@ -94,21 +164,39 @@ export function ReservationForm() {
             <Option value={ReservationStatus.Tentative}>tentative</Option>
           </Select>
         </LabelContainer>
-        <LabelContainer htmlFor="size">
-          How Many?
-          <Input
-            onChange={validatePartySize}
-            {...(isAttending ? { disabled: false } : { disabled: true })}
-            type="number"
-            id="size"
-            name="partySize"
-            placeholder="party size"
-            defaultValue={0}
-            min={1}
-            max={5}
-            value={partySize}
-          />
-        </LabelContainer>
+        {isAttending && (
+          <>
+            <LabelContainer htmlFor="size">
+              How Many?
+              <Input
+                onChange={validatePartySize}
+                {...(isAttending ? { disabled: false } : { disabled: true })}
+                type="number"
+                id="size"
+                name="partySize"
+                placeholder="party size"
+                min={0}
+                max={5}
+                value={formData.partySize}
+              />
+            </LabelContainer>
+            {fullNameInputs.map((el) => el)}
+            <LabelContainer htmlFor="size">
+              Number of Vegan meals?
+              <Input
+                onChange={validateMeals}
+                {...(isAttending ? { disabled: false } : { disabled: true })}
+                type="number"
+                id="veg"
+                name="veg"
+                placeholder="vegan meals"
+                min={0}
+                max={formData.partySize}
+                value={formData.veg}
+              />
+            </LabelContainer>
+          </>
+        )}
         <ButtonContainer>
           <Button type="submit">Submit</Button>
         </ButtonContainer>
@@ -125,16 +213,16 @@ export function ReservationForm() {
             color: Colors.accent,
             borderBottom: `1px solid ${Colors.accent}`,
           }}
-          onClick={() => setIsEditing(true)}
+          onClick={() => setIsModalOpen(true)}
         >
           Need To make a change?
         </Button>
       </Form>
-      {isEditing && (
+      {isModalOpen && (
         <Modal
-          requestClose={() => setIsEditing(false)}
-          setFormData={() => {}}
-        ></Modal>
+          requestClose={() => setIsModalOpen(false)}
+          setFormData={setFormDataHandler}
+        />
       )}
     </>
   );

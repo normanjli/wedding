@@ -34,6 +34,7 @@ export default async function handler(
 
     const reservation = new Reservation(data[0].data() as ReservationInterface);
     res.status(200).json({ reservation: reservation });
+    return;
   }
   if (method === 'POST' || method === 'PUT') {
     const body = req?.body;
@@ -54,5 +55,7 @@ export default async function handler(
       .catch((e) => {
         res.status(200).json({ status: 204, message: e.message });
       });
+    return;
   }
+  res.status(200).json({ status: 304, message: 'fallback response' });
 }

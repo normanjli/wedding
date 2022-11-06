@@ -1,48 +1,44 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Button } from '../button/Button.style';
 import {
-  HeaderLink,
   HeaderSubTitle,
   HeaderTitle,
-  Nav,
   StyledHeader,
+  TitleContainer,
 } from './Header.styles';
+import FullSizeNav from './nav/FullSizeNav';
+import SmallNav from './nav/SmallNav';
 
 const Header = () => {
-  const router = useRouter();
+  const [isHidden, setisHidden] = useState(true);
+
+  const toggleMenuHandler = () => {
+    setisHidden(!isHidden);
+  };
+
+  const closeMenu = () => setisHidden(false);
 
   return (
     <>
       <StyledHeader>
-        <div>
-          <HeaderTitle>Kaitlin & Norman</HeaderTitle>
-          <HeaderSubTitle>April 22nd, 2023 | Crestline, CA</HeaderSubTitle>
-        </div>
-        <Nav>
-          <Link href="/" passHref>
-            <HeaderLink active={router.pathname === '/'}>Home</HeaderLink>
-          </Link>
-          <Link href="/stay" passHref>
-            <HeaderLink active={router.pathname === '/stay'}>
-              Where to stay
-            </HeaderLink>
-          </Link>
-          <Link href="/eventinfo" passHref>
-            <HeaderLink active={router.pathname === '/eventinfo'}>
-              Event Information
-            </HeaderLink>
-          </Link>
-          <Link href="/registry" passHref>
-            <HeaderLink active={router.pathname === '/registry'}>
-              Registry
-            </HeaderLink>
-          </Link>
-          <Link href="/reservations" passHref>
-            <HeaderLink active={router.pathname === '/reservations'}>
-              RSVP
-            </HeaderLink>
-          </Link>
-        </Nav>
+        <TitleContainer>
+          <div>
+            <HeaderTitle>Kaitlin & Norman</HeaderTitle>
+            <HeaderSubTitle>April 22nd, 2023 | Crestline, CA</HeaderSubTitle>
+          </div>
+          <Button onClick={toggleMenuHandler} variant="no-underline">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="48"
+              width="48"
+              fill="currentColor"
+            >
+              <path d="M6 36v-3h36v3Zm0-10.5v-3h36v3ZM6 15v-3h36v3Z" />
+            </svg>
+          </Button>
+        </TitleContainer>
+        <SmallNav requestClose={closeMenu} isHidden={isHidden} />
+        <FullSizeNav />
       </StyledHeader>
     </>
   );
