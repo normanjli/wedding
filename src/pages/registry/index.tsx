@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 import Header from '../../components/header/Header';
+import { MainContainer } from '../../components/main/MainContainer.styles';
 
 const Registry: NextPage = () => {
   return (
     <div>
-      <main>
-        <Header />
-      </main>
+      <Header />
+      <MainContainer></MainContainer>
     </div>
   );
 };
