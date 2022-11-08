@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import Header from '../components/header/Header';
 import { MainContainer } from '../components/main/MainContainer.styles';
 import { Text } from '../components/main/Text.styles';
 
