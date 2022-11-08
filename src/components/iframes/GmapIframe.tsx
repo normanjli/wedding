@@ -5,7 +5,6 @@ const GmapIframe = (props: any) => {
     <iframe
       width="300"
       height="200"
-      id="gmap_canvas"
       frameBorder="0"
       scrolling="no"
       {...props}
