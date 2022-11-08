@@ -16,9 +16,18 @@ const Registry: NextPage = () => {
         Our Zola Wedding Registry
       </a>
       <Script
-        id="registryScript"
-        dangerouslySetInnerHTML={{
-          __html: `!function(e,t,n){var s,a=e.getElementsByTagName(t)[0];e.getElementById(n)||(s=e.createElement(t),s.id=n,s.async=!0,s.src="https://widget.zola.com/js/widget.js",a.parentNode.insertBefore(s,a))}(document,"script","zola-wjs");`,
+        id="zola-wjs"
+        src="https://widget.zola.com/js/widget.js"
+        onReady={() => {
+          let s,
+            a = document.getElementById('zola-wjs');
+          // eslint-disable-next-line no-unused-expressions
+          s ||
+            ((s = document.createElement('script')),
+            (s.id = 'zola-wjs'),
+            (s.async = !0),
+            (s.src = 'https://widget.zola.com/js/widget.js'),
+            a?.parentNode?.insertBefore(s, a));
         }}
       />
     </MainContainer>

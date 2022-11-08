@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { Grid, Flex } from '../../components/flex.stories';
 import GmapIframe from '../../components/iframes/GmapIframe';
+import { Link } from '../../components/link/Link.style';
 import { MainContainer } from '../../components/main/MainContainer.styles';
 import { Text } from '../../components/main/Text.styles';
 import { Colors } from '../../styles/Colors';
@@ -12,8 +13,10 @@ const Stay: NextPage = () => {
       <MainContainer>
         <article>
           <Text>
-            The San Bernardino Mountains are a wonderful place in Spring. Due to
-            the resort nature of the mountains, there are plenty of great
+            The San Bernardino Mountains are a wonderful place in Spring.
+            <br></br>
+            <br></br>
+            Due to the resort nature of the mountains, there are plenty of great
             options to stay for the weekend!
           </Text>
         </article>
@@ -25,9 +28,9 @@ const Stay: NextPage = () => {
           <section>
             <Flex>
               <Grid>
-                <Link href="https://www.thenorthshoreinn.com" passHref>
-                  <a target="_blank">The North Shore Inn</a>
-                </Link>
+                <NextLink href="https://www.thenorthshoreinn.com" passHref>
+                  <Link target="_blank">The North Shore Inn</Link>
+                </NextLink>
                 <ul>
                   <li>24202 Lake Dr, Crestline, CA 92325</li>
                   <li> Distance 2.7 miles </li>
@@ -40,9 +43,9 @@ const Stay: NextPage = () => {
           <section>
             <Flex>
               <Grid>
-                <Link href="https://theplacetorelax.com/" passHref>
-                  <a target="_blank">Sleepy Hollow Cabins and Hotel</a>
-                </Link>
+                <NextLink href="https://theplacetorelax.com/" passHref>
+                  <Link target="_blank">Sleepy Hollow Cabins</Link>
+                </NextLink>
                 <ul>
                   <li>24202 Lake Dr, Crestline, CA 92325</li>
                   <li> Distance 2.9 miles </li>
@@ -50,6 +53,11 @@ const Stay: NextPage = () => {
                 </ul>
               </Grid>
               <GmapIframe src="https://www.google.com/maps/embed?pb=!4v1667932787302!6m8!1m7!1srinzzEo_QqJnGvMzsNnVcQ!2m2!1d34.24347542380253!2d-117.2791168816011!3f125.41703008436204!4f4.858234982215464!5f2.4345861343997486" />
+            </Flex>
+          </section>
+          <section>
+            <Flex>
+              <Grid></Grid>
             </Flex>
           </section>
         </Grid>

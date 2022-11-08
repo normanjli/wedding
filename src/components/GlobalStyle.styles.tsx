@@ -13,4 +13,13 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     color:${Colors.primary}
   }
+
+  li {
+    text-align: left;
+  }
+
+  ul {
+    padding-left: 30px;
+    padding-right: 20px;
+  }
 `;
