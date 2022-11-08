@@ -9,4 +9,5 @@ export const MainContainer = styled.main`
   padding: 10px;
   background-color: white;
   border-radius: 20px;
+  position: relative;
 `;

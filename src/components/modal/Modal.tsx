@@ -40,7 +40,8 @@ export const Modal = ({ requestClose, setFormData }: ModalProps) => {
   }, [isLoading, setIsLoading, setFormData, input, requestClose]);
 
   return (
-    <ModalContainer>
+    <>
+      <ModalContainer onClick={requestClose} />
       <ModalContent>
         <ModalClose onClick={requestClose}>X</ModalClose>
         Enter your email below to retrieve your Reservation
@@ -54,7 +55,7 @@ export const Modal = ({ requestClose, setFormData }: ModalProps) => {
         />
         <Button onClick={searchEmail}>Submit</Button>
       </ModalContent>
-    </ModalContainer>
+    </>
   );
 };
 

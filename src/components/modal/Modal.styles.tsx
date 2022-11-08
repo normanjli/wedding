@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from '../button/Button.style';
 
 export const ModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
   background: rgba(0 0 0 /0.5);
   width: 100%;
   height: 100%;
@@ -16,7 +16,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  position: relative;
+  position: fixed;
   display: grid;
   gap: 16px;
   background-color: white;
@@ -25,6 +25,8 @@ export const ModalContent = styled.div`
   border-radius: 16px;
   max-width: 400px;
   width: 80%;
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
   font-size: 20px;
   z-index: 20;
