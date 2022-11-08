@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Script from 'next/script';
+import { Button } from '../../components/button/Button.style';
 import { MainContainer } from '../../components/main/MainContainer.styles';
 // import { CenteredHeader } from '../../components/main/Text.styles';
 
@@ -7,6 +8,11 @@ const Registry: NextPage = () => {
   return (
     <MainContainer>
       {/* <CenteredHeader>Check back soon for information!</CenteredHeader> */}
+      <Button as="a" href="https://account.venmo.com/u/normanjli">
+        <h3 style={{ fontWeight: 'normal' }}>
+          {'We accept cash through Venmo!'}
+        </h3>
+      </Button>
       <a
         className="zola-registry-embed"
         href="www.zola.com/registry/kaitlinandnorman"
