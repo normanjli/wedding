@@ -80,18 +80,19 @@ export const NavMenu = styled.nav`
 export const HeaderTitle = styled.h1`
   margin: 0;
   margin-top: 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lora', sans-serif;
   text-align: center;
   color: ${Colors.primary};
-  font-size: 40px;
+  font-size: 48px;
+  font-weight: 300;
 `;
 
 export const HeaderSubTitle = styled.h4`
   font-family: 'Roboto', sans-serif;
   text-align: center;
   color: ${Colors.primary};
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
   margin-top: 10px;
-  font-weight: 400;
+  font-weight: 300;
 `;
