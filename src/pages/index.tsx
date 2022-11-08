@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         <br />
         <Text>
           Kaitlin Krumwiede and Norman Li, soon to be Kaitlin Miao and Norman
-          Miao (more on that later), are a some California transplants to Salt
+          Miao (more on that later), are some California transplants to Salt
           Lake City, Utah.
         </Text>
         <Text>

@@ -12,6 +12,9 @@ import {
   Select,
 } from './Form.style';
 import axios from 'axios';
+import { Text } from '../main/Text.styles';
+
+//TODO add a clear function and a success message
 
 export function ReservationForm() {
   const [formData, setFormData] = useState<Reservation>(new Reservation());
@@ -23,8 +26,24 @@ export function ReservationForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fullNameInputs, setFullNameInputs] = useState<JSX.Element[]>([]);
 
+  const [submissionStatus, setSubmissionStatus] = useState({
+    isSubmitting: false,
+    isSuccess: false,
+  });
+
+  const resetForm = () => {
+    setWarningVisible(false);
+    setFormData(new Reservation());
+    setFullNameInputs([]);
+    setAttending(true);
+  };
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setSubmissionStatus({
+      ...submissionStatus,
+      isSubmitting: true,
+    });
     formData.guestList = [formData.name];
     for (let i = 0; i < formData.partySize - 1; i++) {
       formData.guestList.push(event.target[`guest${i + 1}`].value);
@@ -35,7 +54,23 @@ export function ReservationForm() {
     };
 
     const endpoint = '/api/reservation';
-    await axios.post(endpoint, body);
+    const res = await axios.post(endpoint, body);
+
+    if (res.status !== 200) {
+      setSubmissionStatus({
+        isSubmitting: false,
+        isSuccess: false,
+      });
+      return;
+    }
+    setSubmissionStatus({
+      isSubmitting: false,
+      isSuccess: res.data.reservation.email === body.email,
+    });
+    resetForm();
+    setTimeout(() =>
+      setSubmissionStatus({ isSubmitting: false, isSuccess: false })
+    );
   };
 
   const disablePartySize = (event: any) => {
@@ -85,17 +120,6 @@ export function ReservationForm() {
   };
 
   const validatePartySize = (event: any) => {
-    if (event.target.value == 0) {
-      setFormData({
-        ...formData,
-        status: ReservationStatus.NotAttending,
-        partySize: 0,
-      });
-      renderInputs(0);
-      setAttending(false);
-      return;
-    }
-
     setWarningVisible(false);
     if (event.target.value > 5) {
       setWarningVisible(true);
@@ -164,48 +188,47 @@ export function ReservationForm() {
             <Option value={ReservationStatus.Tentative}>tentative</Option>
           </Select>
         </LabelContainer>
-        {isAttending && (
-          <>
-            <LabelContainer htmlFor="size">
-              How Many?
-              <Input
-                onChange={validatePartySize}
-                {...(isAttending ? { disabled: false } : { disabled: true })}
-                type="number"
-                id="size"
-                name="partySize"
-                placeholder="party size"
-                min={0}
-                max={5}
-                value={formData.partySize}
-              />
-            </LabelContainer>
-            {fullNameInputs.map((el) => el)}
-            <LabelContainer htmlFor="size">
-              Number of Vegan meals?
-              <Input
-                onChange={validateMeals}
-                {...(isAttending ? { disabled: false } : { disabled: true })}
-                type="number"
-                id="veg"
-                name="veg"
-                placeholder="vegan meals"
-                min={0}
-                max={formData.partySize}
-                value={formData.veg}
-              />
-            </LabelContainer>
-          </>
-        )}
+        <LabelContainer htmlFor="size">
+          How Many?
+          <Input
+            onChange={validatePartySize}
+            {...(isAttending ? { disabled: false } : { disabled: true })}
+            type="number"
+            id="size"
+            name="partySize"
+            placeholder="party size"
+            min={0}
+            max={5}
+            value={formData.partySize}
+          />
+        </LabelContainer>
+        {isAttending && <>{fullNameInputs.map((el) => el)}</>}
+        <LabelContainer htmlFor="size">
+          Number of Vegan meals?
+          <Input
+            onChange={validateMeals}
+            {...(isAttending ? { disabled: false } : { disabled: true })}
+            type="number"
+            id="veg"
+            name="veg"
+            placeholder="vegan meals"
+            min={0}
+            max={formData.partySize}
+            value={formData.veg}
+          />
+        </LabelContainer>
         <ButtonContainer>
-          <Button type="submit">Submit</Button>
+          <Button type="submit">
+            {submissionStatus.isSubmitting ? 'Loading...' : 'Submit'}
+          </Button>
         </ButtonContainer>
         {isWarningVisible && (
-          <p>
+          <Text>
             If you need more than five party members please reach out to Kaitlin
             or Norman to discuss your needs!
-          </p>
+          </Text>
         )}
+        {submissionStatus.isSuccess && <Text>Successfully submitted!</Text>}
         <Button
           type="button"
           style={{

@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat, no-repeat;
     @media (max-width: 1300px) {
        background: url("./Flower2.svg") fixed right -100px bottom -100px no-repeat;
-
     }
     font-family: 'Roboto', sans-serif;
     color:${Colors.primary}

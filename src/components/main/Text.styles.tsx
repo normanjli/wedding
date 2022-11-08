@@ -8,3 +8,8 @@ export const Text = styled.p`
   margin-top: 0;
   margin-bottom: 0;
 `;
+
+export const CenteredHeader = styled.h1`
+  margin: auto;
+  text-align: center;
+`;

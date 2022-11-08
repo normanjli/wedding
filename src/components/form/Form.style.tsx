@@ -11,9 +11,11 @@ export const Form = styled.form`
   padding: 24px;
   border-radius: 16px;
   background-color: white;
+  text-align: center;
 `;
 
 export const LabelContainer = styled.label`
+  text-align: left;
   display: grid;
   gap: 4px;
 `;

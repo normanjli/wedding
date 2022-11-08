@@ -1,11 +1,7 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import { Flex, Grid } from '../../components/flex.stories';
 import Header from '../../components/header/Header';
-import GmapIframe from '../../components/iframes/GmapIframe';
 import { MainContainer } from '../../components/main/MainContainer.styles';
-import { Text } from '../../components/main/Text.styles';
-import { Colors } from '../../styles/Colors';
+import { CenteredHeader, Text } from '../../components/main/Text.styles';
 
 const Stay: NextPage = () => {
   return (
@@ -19,7 +15,9 @@ const Stay: NextPage = () => {
             great options to stay for the weekend!
           </Text>
         </article>
-        <h2>Crestline</h2>
+        <CenteredHeader>Check back soon for information!</CenteredHeader>
+
+        {/* <h2>Crestline</h2>
         <hr style={{ borderTop: `2px solid` + Colors.primary }} />
         <Grid>
           <section>
@@ -52,7 +50,7 @@ const Stay: NextPage = () => {
               <GmapIframe src="https://maps.google.com/maps?q=24033%20Lake%20Drive,%20Crestline,%20CA%2092325&t=&z=13&ie=UTF8&iwloc=&output=embed" />
             </Flex>
           </section>
-        </Grid>
+        </Grid> */}
       </MainContainer>
     </div>
   );

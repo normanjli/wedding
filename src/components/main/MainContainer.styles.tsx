@@ -7,4 +7,6 @@ export const MainContainer = styled.main`
   min-width: 300px;
   text-align: left;
   padding: 10px;
+  background-color: white;
+  border-radius: 20px;
 `;
