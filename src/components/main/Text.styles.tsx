@@ -13,5 +13,6 @@ export const Text = styled.p`
 
 export const CenteredHeader = styled.h1`
   margin: auto;
+  margin-bottom: 20px;
   text-align: center;
 `;

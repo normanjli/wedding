@@ -15,6 +15,6 @@ export const Link = styled.a<{ variant?: string }>`
   }
   @media (min-width: 800px) {
     display: ${(props) =>
-      props.variant === 'no-underline' ? 'none' : 'block'};
+      props.variant === 'no-underline' ? 'none' : 'inline'};
   }
 `;

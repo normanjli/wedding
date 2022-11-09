@@ -21,13 +21,13 @@ const Stay: NextPage = () => {
             hotels and resorts.
             <br></br>
             We also recommend{' '}
-            <a href="https://www.airbnb.com/s/Crestline--California--United-States/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_lengths%5B%5D=one_week&price_filter_input_type=0&price_filter_num_nights=5&date_picker_type=calendar&source=structured_search_input_header&search_type=autocomplete_click&query=Crestline%2C%20CA&place_id=ChIJI2bbPJdQw4ARDDba8iKtntg">
-              Airbnb
-            </a>{' '}
+            <NextLink href="https://www.airbnb.com/s/Crestline--California--United-States/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_lengths%5B%5D=one_week&price_filter_input_type=0&price_filter_num_nights=5&date_picker_type=calendar&source=structured_search_input_header&search_type=autocomplete_click&query=Crestline%2C%20CA&place_id=ChIJI2bbPJdQw4ARDDba8iKtntg">
+              <Link>Airbnb</Link>
+            </NextLink>{' '}
             and{' '}
-            <a href="https://www.vrbo.com/search/keywords:crestline-california-united-states-of-america?petIncluded=false">
-              Vrbo
-            </a>{' '}
+            <NextLink href="https://www.vrbo.com/search/keywords:crestline-california-united-states-of-america?petIncluded=false">
+              <Link>Vrbo</Link>
+            </NextLink>{' '}
             as options.
           </Text>
         </article>

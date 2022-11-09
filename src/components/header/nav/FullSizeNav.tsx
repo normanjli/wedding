@@ -24,6 +24,9 @@ const FullSizeNav = () => {
           Registry
         </HeaderLink>
       </Link>
+      <Link href="/faqs" passHref>
+        <HeaderLink active={router.pathname === '/faqs'}>FAQ</HeaderLink>
+      </Link>
       <Link href="/reservation" passHref>
         <HeaderLink active={router.pathname === '/reservation'}>
           RSVP
