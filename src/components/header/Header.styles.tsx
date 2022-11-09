@@ -80,7 +80,7 @@ export const NavMenu = styled.nav`
 export const HeaderTitle = styled.h1`
   margin: 0;
   margin-top: 20px;
-  font-family: 'Lora', sans-serif;
+  font-family: 'Cedarville Cursive', sans-serif;
   text-align: center;
   color: ${Colors.primary};
   font-size: 48px;

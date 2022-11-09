@@ -57,7 +57,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Lora&display=swap"
+            href="https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap"
             rel="stylesheet"
           ></link>
         </Head>
