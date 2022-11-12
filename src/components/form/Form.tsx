@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Reservation, ReservationStatus } from '../../models/Reservation';
+import {
+  Guest,
+  Reservation,
+  ReservationStatus,
+} from '../../models/Reservation';
 import { Colors } from '../../styles/Colors';
 import { Button } from '../button/Button.style';
 import { Modal } from '../modal/Modal';
@@ -40,17 +44,32 @@ export function ReservationForm() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+
+    let numberOfChildren = 0;
+
     setSubmissionStatus({
       ...submissionStatus,
       isSubmitting: true,
     });
-    formData.guestList = [formData.name];
+    formData.guestList = [
+      {
+        guestName: formData.name,
+        isChild: false,
+      },
+    ];
     for (let i = 0; i < formData.partySize - 1; i++) {
-      formData.guestList.push(event.target[`guest${i + 1}`].value);
+      formData.guestList.push({
+        guestName: event.target[`guest${i + 1}`].value,
+        isChild: event.target[`isChild${i + 1}`].checked,
+      });
+      if (event.target[`isChild${i + 1}`].checked) {
+        numberOfChildren += 1;
+      }
     }
 
     const body = {
       ...formData,
+      numberOfChildren,
     };
 
     const endpoint = '/api/reservation';
@@ -94,7 +113,7 @@ export function ReservationForm() {
     disablePartySize(event);
   };
 
-  const renderInputs = (number: number, previousGuests?: string[]) => {
+  const renderInputs = (number: number, previousGuests?: Guest[]) => {
     const inputs = [];
 
     if (number > 1) {
@@ -108,8 +127,18 @@ export function ReservationForm() {
               name={`guest${i}`}
               required
               placeholder={`guest ${i}`}
-              defaultValue={previousGuests?.[i] || ''}
+              defaultValue={previousGuests?.[i].guestName || ''}
             />
+            <label>
+              <Input
+                type="checkbox"
+                title="child?"
+                id={`isChild${i}`}
+                name={`isChild${i}`}
+                checked={previousGuests?.[i].isChild}
+              />
+              child?
+            </label>
           </LabelContainer>
         );
       }

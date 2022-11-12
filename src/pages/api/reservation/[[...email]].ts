@@ -55,6 +55,7 @@ export default async function handler(
       .catch((e) => {
         res.status(200).json({ status: 204, message: e.message });
       });
+
     return;
   }
   res.status(200).json({ status: 304, message: 'fallback response' });

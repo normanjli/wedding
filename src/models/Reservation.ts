@@ -11,7 +11,13 @@ export interface ReservationInterface {
   email: string;
   partySize?: number;
   veg?: number;
-  guestList?: string[];
+  guestList?: Guest[];
+  numberOfChildren: number;
+}
+
+export interface GuestInterface {
+  guestName: string;
+  isChild: boolean;
 }
 
 export class Reservation implements ReservationInterface {
@@ -25,7 +31,9 @@ export class Reservation implements ReservationInterface {
 
   veg = 0;
 
-  guestList: string[] = [];
+  guestList: Guest[] = [];
+
+  numberOfChildren: number = 0;
 
   constructor(props?: ReservationInterface) {
     this.email = props?.email || '';
@@ -34,5 +42,17 @@ export class Reservation implements ReservationInterface {
     this.status = props?.status || ReservationStatus.Attending;
     this.veg = props?.veg || 0;
     this.guestList = props?.guestList || [];
+    this.numberOfChildren = props?.numberOfChildren || 0;
+  }
+}
+
+export class Guest implements GuestInterface {
+  guestName = '';
+
+  isChild = false;
+
+  constructor(props?: GuestInterface) {
+    this.guestName = props?.guestName || '';
+    this.isChild = props?.isChild || false;
   }
 }
