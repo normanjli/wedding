@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     <MainContainer>
       <Image
         alt="norman and kaitlin"
-        src="/Kaitlinandnorman.jpg"
+        src="/IMG_0073.webp"
         height={600}
         width={800}
         layout="responsive"
