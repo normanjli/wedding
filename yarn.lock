@@ -719,6 +719,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/google-apps-script@^1.0.56":
+  version "1.0.56"
+  resolved "https://registry.yarnpkg.com/@types/google-apps-script/-/google-apps-script-1.0.56.tgz#5d0930bf6c224913532da4c63bede1df2d17afe2"
+  integrity sha512-3YGOtRlnWPSARl/n2BKt0qiIA6Y3/5BLC2zH9s/jcu+1rpxR07noLCFxTZ2BQBIfDl6+Vs9iKjLTgdbbL8q/mg==
+
 "@types/hoist-non-react-statics@*":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"

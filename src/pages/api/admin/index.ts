@@ -23,5 +23,5 @@ export default async function handler(
 
   return res
     .status(200)
-    .json({ emails, guestList, totalGuests, totalChildren });
+    .json({ emails, guestList, totalGuests, totalChildren, reservations });
 }
