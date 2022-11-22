@@ -25,11 +25,11 @@ export class Reservation implements ReservationInterface {
 
   status: ReservationStatus = ReservationStatus.Attending;
 
-  partySize = 0;
+  partySize: number = 0;
 
   email = '';
 
-  veg = 0;
+  veg: number = 0;
 
   guestList: Guest[] = [];
 
@@ -38,11 +38,11 @@ export class Reservation implements ReservationInterface {
   constructor(props?: ReservationInterface) {
     this.email = props?.email || '';
     this.name = props?.name || '';
-    this.partySize = props?.partySize || 0;
+    this.partySize = Number(props?.partySize) || 0;
     this.status = props?.status || ReservationStatus.Attending;
-    this.veg = props?.veg || 0;
+    this.veg = Number(props?.veg) || 0;
     this.guestList = props?.guestList || [];
-    this.numberOfChildren = props?.numberOfChildren || 0;
+    this.numberOfChildren = Number(props?.numberOfChildren) || 0;
   }
 }
 

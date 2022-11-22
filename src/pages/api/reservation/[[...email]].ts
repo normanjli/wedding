@@ -41,7 +41,9 @@ export default async function handler(
     if (!body) {
       return res.status(200).json({ status: 204, message: '' });
     }
-
+    body.partySize = Number(body.partySize);
+    body.veg = Number(body.veg);
+    body.numberOfChildren = Number(body.numberOfChildren);
     const existingReservationSnapshot = await reservationsCollection
       .doc(body.email)
       .get();
