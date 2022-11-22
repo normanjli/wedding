@@ -20,8 +20,14 @@ export default async function handler(
     (a, b) => a + b.numberOfChildren,
     0
   );
+  const totalVeg = reservations.reduce((a, b) => a + b.veg, 0);
 
-  return res
-    .status(200)
-    .json({ emails, guestList, totalGuests, totalChildren, reservations });
+  return res.status(200).json({
+    emails,
+    guestList,
+    totalGuests,
+    totalChildren,
+    totalVeg,
+    reservations,
+  });
 }
