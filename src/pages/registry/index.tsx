@@ -17,7 +17,7 @@ const Registry: NextPage = () => {
         us a gift, please see our Zola registry below.
         <br></br>
         <b>
-          Please send any phyical gifts directly to our home in Salt Lake, We
+          Please send any physical gifts directly to our home in Salt Lake, We
           will be travelling directly after our wedding and will have limited
           car space on our trip.
         </b>
